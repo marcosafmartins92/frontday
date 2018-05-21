@@ -7,6 +7,7 @@ export const SLIDES = [
   {title: 'Promises', subtitle: 'Método Promise.resolve(valor)', text: 'Retorna um objeto Promise resolvida dentro do then'},
   {title: 'Promises', subtitle: 'Método Promise.prototype.catch(quandoRejeitado)', text: 'Adiciona uma callback que trata a rejeição pra promise e retorna uma promise resolvendo o problema'},
   {title: 'Promises', subtitle: 'Método Promise.prototype.catch(quandoSucesso, quandoRejeitado)', text: 'Adiciona calback de tratamento de sucesso da promise e de rejeição da promise'},
+  {title: 'Promises', subtitle: 'Método Promise.prototype.finally(finalmente)', text: 'ECMAScript Proposal, '},
   {title: 'Promises', subtitle: 'Diferença entre o .catch e o .then(_, quandoRejeitado)', text: 'O .catch pega qualquer problema durante a execução do código, o .then(quandoRejeitado) pega apenas quando é um erro específico da Promise que esta sendo tratada'},
   {title: 'Subscribe', subtitle: 'Entendendo um pouco sobre observables', text: 'Observables dão suporte à troca de informações entre os publishers e os subscribes da aplicação, ele traz consigo recursos a mais para programação assíncrona e tratamento de valores multiplos '},
   {title: 'Subscribe', subtitle: 'Publishers', text: 'Ao criar uma instância de Observable voce define uma função subscribe que possui como paramtero a definição dos observers e pode ser cancelada com unsubscribe'},
