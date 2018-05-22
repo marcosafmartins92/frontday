@@ -1,0 +1,2 @@
+export const promiseSuccess = (ms, msg) => new Promise(resolve => setTimeout(() => resolve(msg), ms));
+export const promiseFailure = (ms, msg) => new Promise((resolve, reject) => setTimeout(() => reject(msg), ms));
