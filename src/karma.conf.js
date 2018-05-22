@@ -11,11 +11,8 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-phantomjs-launcher'),
       require('karma-verbose-reporter'),
-      require('karma-coverage-istanbul-reporter'),
       require('karma-chai-as-promised'),
-      require('karma-webpack'),
-      require('karma-babel-preprocessor'),
-      require('babel-core'),   
+      require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -32,26 +29,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['PhantomJS'],
-    singleRun: false,
-    preprocessors: {
-      'src/**/*.spec.ts': ['babel'],
-      'test/**/*.spec.ts': ['babel']
-    },
-    babelPreprocessor: {
-      options: {
-        presets: ['es5'],
-        sourceMap: 'inline'
-      },
-      filename: function (file) {
-        return file.originalPath.replace(/\.js$/, '.es5.js');
-      },
-      sourceFileName: function (file) {
-        return file.originalPath;
-      }
-    },
-    files: [
-      'node_modules/babel-polyfill/dist/polyfill.js',
-      // ...
-    ],
+    singleRun: false
   });
 };
