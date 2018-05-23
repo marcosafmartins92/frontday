@@ -46,59 +46,80 @@ describe('Promises', () => {
               });
           });
       });
-        // describe('#Promise.reject', () => {
-        //     it('Retorna um objeto Promise rejeitado que será capturado dentro do catch', (done) => {
-        //         expect(Promise.reject('sucesso')).should.eventually.equal('sucesso').notify(done)
-        //     });
-        // });
-        // describe('#Promise.prototype.catch', () => {
-        //     it('Adiciona uma callback que trata a rejeição pra promise e retorna uma promise resolvendo o problema', (done) => {
-        //         promiseFailure(500, 'error').catch((err) => {
-        //             expect(err).to.be.equal('error')
-        //         })
-        //     });
-        // });
-        // describe('#Promise.prototype.then', () => {
-        //     it('Adiciona calback de tratamento de sucesso da promise', (done) => {
-        //         promiseSuccess(1500, 'sucesso').then((sucesso) => {
-        //             expect(sucesso).to.be.equal('sucesso');
-        //         });
-        //     });
-        //     it('Adiciona calback de tratamento de rejeição da promise', (done) => {
-        //         promiseFailure(1000, 'erro').then(
-        //             () => {},
-        //             (falha) => {
-        //                 expect(falha).to.be.equal('erro');
-        //         });
-        //     });
-        //     // it('Também pode ser usado como finally apos o trabamento do erro pelo catch', (done) => {
-        //     //     promiseFailure(1500, 'finally')
-        //     //     .catch((error) => error)
-        //     //     .then((finally) => {
-        //     //         expect(finally).to.be.equal('finally');
-        //     //     });
-        //     // });
-        //     it('Diferença entre o .catch e o .then(_, quandoRejeitado): O .catch pega qualquer problema durante a execução do código, o .then(quandoRejeitado) pega apenas quando é um erro específico da Promise que esta sendo tratada', (done) => {
-        //         expect(2).to.be.equal(2);
-        //     });
-        // });
-        // describe('#Promise.prototype.then', () => {
-        //     it('Adiciona calback de tratamento de sucesso da promise', (done) => {
-        //         promiseSuccess(1500, 'sucesso').then((sucesso) => {
-        //             expect(sucesso).to.be.equal('sucesso');
-        //         });
-        //     });
-        // });
-        // describe('Async Await', () => {
-        //     it('Em funções assíncronas pode-se utilizar o operador await dentro de um try, catch, finally para tratar a resposta das funções assíncronas', async (done) => {
-        //         let result;
-        //         try {
-        //             result = await promiseSuccess(1500, 'sucesso');
-        //         } catch (e) {
-        //             throw e
-        //         } finally {
-        //             expect(result).to.be.equal('sucesso');
-        //         }
-        //     });
-        // });
-});
+      describe('#Promise.prototype.catch', () => {
+          it('Adiciona uma callback que trata a rejeição pra promise e retorna uma promise resolvendo o problema', (done) => {
+              promiseFailure(500, 'error').catch((err) => {
+                  expect(err).toBe('error');
+                  done();
+              });
+          });
+      });
+      describe('#Promise.prototype.then', () => {
+
+          it('Adiciona calback de tratamento de sucesso da promise', (done) => {
+              promiseSuccess(1500, 'sucesso').then((sucesso) => {
+                  expect(sucesso).toBe('sucesso');
+                  done();
+              });
+          });
+          it('Adiciona calback de tratamento de rejeição da promise', (done) => {
+              promiseFailure(1000, 'erro').then(
+                  () => {},
+                  (falha) => {
+                      expect(falha).toBe('erro');
+                    done();
+              });
+          });
+          it('Também pode ser usado como finally apos o tratamento do erro pelo catch', (done) => {
+              promiseFailure(1500, 'finally')
+              .catch((error) => error)
+              .then((final) => {
+                  expect(final).toBe('finally');
+                done();
+              });
+          });
+          it('Diferença entre o .catch e o .then(_, quandoRejeitado): O .catch pega qualquer problema durante' +
+            ' a execução do código dentro do then(do sucesso), o .then(quandoRejeitado) pega apenas quando é um erro ' +
+            'específico da Promise que está, e não pega o erro ocorrido dentro do sucesso' +
+            ' sendo tratada', (done) => {
+              promiseSuccess(500, 'success').then(
+                data => {
+                  console.info('entrou no sucesso');
+                  expect(data).toBe('success');
+                  throw data;
+                },
+                error => {
+                  console.info('entrou no error');
+                }
+              ).catch(
+                (data => {
+                  expect(data).toBe('success');
+                  console.info('entrou no catch');
+                  done();
+              }));
+          });
+      });
+      describe('#Promise.prototype.then', () => {
+          it('Adiciona calback de tratamento de sucesso da promise', (done) => {
+              promiseSuccess(1500, 'sucesso').then((sucesso) => {
+                  expect(sucesso).toBe('sucesso');
+                  done();
+              });
+          });
+      });
+      describe('Async Await', () => {
+          it('Em funções assíncronas pode-se utilizar o operador await dentro de um try, catch, finally para' +
+            ' tratar a resposta das funções assíncronas', async (done) => {
+            let result;
+            try {
+                  result = await promiseSuccess(1500, 'sucesso');
+                  expect(result).toBe('sucesso');
+                  done();
+              } catch (e) {
+                  throw e;
+              } finally {
+                console.info('finally');
+              }
+          });
+      });
+
