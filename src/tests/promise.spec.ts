@@ -1,6 +1,8 @@
 // Promise #all, #race, #reject, #resolve, #then, #catch, #finally
 
-import { promiseSuccess, promiseFailure } from './pomises.mock';
+import { promiseSuccess, promiseFailure, sequence } from './pomises.mock';
+import {retry, switchMap, debounceTime} from 'rxjs/operators';
+import {pipe} from 'rxjs';
 
 describe('Promises', () => {
   describe('São objetos usados em processamento assíncrono, ele representa um proxy para um valor que não é,' +
@@ -122,4 +124,60 @@ describe('Async Await', () => {
     }
   });
 });
+describe('Subscribe', () => {
+  it('Observables dão suporte à troca de informações entre os publishers'+
+  ' e os subscribes da aplicação, ele traz consigo recursos a mais para programação'+
+  ' assíncrona e tratamento de valores múltiplos', (done) => {
+    expect(true).toBeTruthy;
+     done();
+  });
+});
+describe('Publishers', () => {
+  it('Ao criar uma instância de Observable voce define uma função subscribe que possui como paramtero a definição dos observers e pode ser cancelada com unsubscribe', async (done) => {
+    let result = 0
+    sequence.subscribe({
+      next(data) {result += 1; expect(data).toBe(result); done();},
+    });
+  });
+});
+describe('Observers - métodos', () => {
+  it('- Next: Requerido, ele é responsável por manipular cada valor entregue, pode ser, ou não, chamado após o inicio da execução \n - Error: Opcional, responsável pela notificação do erro. \n - Complete: Opcional, trata notificação de execuções completas', async (done) => {
+    expect(true).toBeTruthy;
+    done();
+  });
+});
+describe('Multiplos valores', () => {
+  it('A cada next é pego um valor do multiplo retorno obtido pelo Observer', async (done) => {
+    expect(true).toBeTruthy;
+    done();
+  });
+});
+describe('RXJS', () => {
+  describe('Alguns operadores importantes', () => {
+    it('pipe: Executor de composição de funções, recebe as funções do rxjs e as compõe e uma só', (done) => {
+        expect(pipe).toBeDefined;
+        done();
+    })
 
+    it('retry: Observa quando há um erro no Observable  e faz um resubscribe  com a contagem maxima de quantidades de vezes que passar por parametro', (done) => {
+      expect(retry).toBeDefined;
+      done();
+    })
+
+    it('switchMap: A cada valor modificado  ele emite o valor para sua callback', (done) => {
+      expect(switchMap).toBeDefined;
+      done();
+    })
+
+    it('debounceTime: Recebe um valor numérico em milissegundos e realiza a chamada da função apenas uma fez no intervalo de tempo passado pra ele', (done) => {
+      expect(debounceTime).toBeDefined;
+      done();
+    })
+  });
+
+  describe('Fontes', () => {
+    it('https://medium.com/olxbr-tech/por-que-programa%C3%A7%C3%A3o-reativa-8fba7e754a0f \n https://angular.io/guide/observables \n https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Promise', () => {
+      expect(true).toBeTruthy;
+    })
+  })
+});
