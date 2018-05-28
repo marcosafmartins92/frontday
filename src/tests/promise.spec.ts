@@ -72,7 +72,7 @@ describe('#Promise.prototype.then', () => {
         done();
       });
   });
-  it('Também pode ser usado como finally apos o tratamento do erro pelo catch', (done) => {
+  it('Também pode ser usado como finally após o tratamento do erro pelo catch', (done) => {
     promiseFailure(1500, 'finally')
       .catch((error) => error)
       .then((final) => {

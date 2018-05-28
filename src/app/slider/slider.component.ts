@@ -33,7 +33,8 @@ export class SliderComponent implements OnInit {
     for (i = 0; i < element.length; i++) {
       element[i].style.display = 'none';
     }
-    element[this.slideIndex - 1].style.display = 'block';
+    if(element && element.length)
+      element[this.slideIndex - 1].style.display = 'block';
   }
 
 }
