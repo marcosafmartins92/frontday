@@ -11,13 +11,18 @@ export class SliderComponent implements OnInit {
 
   slideIndex = 1;
   slideList = SLIDES;
+  canShow: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    this.showDivs(this.slideIndex);
-    this.plusDivs(1);
-    this.plusDivs(-1);
+    setTimeout(() => {
+      this.showDivs(this.slideIndex);
+      this.plusDivs(1);
+      this.plusDivs(-1);
+      this.canShow = true;
+    }, 10)
+
   }
 
 

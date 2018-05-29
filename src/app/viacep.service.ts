@@ -13,11 +13,11 @@ export class ViacepService {
 
   constructor(private http: HttpClient) {
     this.getCepObservable = this.getCepSubject.pipe(
-      debounceTime(200),
+      debounceTime(1000),
       switchMap((cep) => {
           return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
       }),
-      retry(2)
+      retry(1)
     );
    }
 
